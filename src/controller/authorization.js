@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const userModel = require("../../model/userModel");
+const userModel = require("../model/userModel");
 
 const loginUser = asyncHandler(async(req, res) =>{
     const {email, password} = req.body;
@@ -20,7 +20,9 @@ const loginUser = asyncHandler(async(req, res) =>{
         id: user._id,
         username: user.username
     }, process.env.JWT_SECRET, {
-        expiresIn: '2h'
+        expiresIn: '2h',
+        // issuer: 'api.chay.com',
+        // audience: 'chay.com'
     })
 
     return res.json(token)
