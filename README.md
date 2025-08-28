@@ -8,3 +8,15 @@
   > 2. Installation
     - npm install express
     - npm install dotenv mongoose body-parser express-async-handler jsonwebtoken bcrypt passport-jwt passport
+
+
++ Docker
+  + Dockerfile
+  + .dockerignore
+  + docker-compose.yml
+
+  + Command
+    - docker-compose up -d
+    - docker-compose build
+    - docker-compose restart
+    - docker-compose down

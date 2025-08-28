@@ -1,0 +1,15 @@
+version: '2'
+services:
+  web-kdmv:
+    build: .
+    container_name: kdmv
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27020:27017"
