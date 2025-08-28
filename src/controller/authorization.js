@@ -28,4 +28,18 @@ const loginUser = asyncHandler(async(req, res) =>{
     return res.json(token)
 })
 
-module.exports = {loginUser}
+const signupUser = asyncHandler(async(req, res, next)=>{
+    const {username, email, password } = req.body
+    // Hash Password
+    const hasdPassword = await bcrypt.hash(password, 10)
+    console.log(hasdPassword)
+    const user = new userModel({
+        username,
+        email,
+        password: hasdPassword
+    })
+    const result = await user.save();
+    return res.status(201).json({message: "User created successfully"})
+})
+
+module.exports = {loginUser, signupUser}

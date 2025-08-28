@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken")
+const {validationResult} = require('express-validator')
 require('dotenv').config()
 
 const logger = (req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
+  console.log(`${req.method} ${req.url}`);  
   next();
 };
 
@@ -23,4 +24,12 @@ const verifyToken = (req, res, next) => {
   next()
 };
 
-module.exports = { logger, errHandler, verifyToken };
+const handleValidation = (req, res, next) => {
+  const result = validationResult(req)
+  if(!result.isEmpty()){
+    return res.status(401).json({error: result.array()})
+  }
+  next()
+}
+
+module.exports = { logger, errHandler, verifyToken, handleValidation };

@@ -12,6 +12,7 @@ const authRouter = require("./src/route/authRoute");
 const passport = require("passport");
 const jwtStrategy = require("./src/common/strategies/jwt-strategy");
 const productRouter = require("./src/route/productRoute");
+const favoriteRouter = require("./src/route/favoriteRoute");
 const app = express();
 const port = process.env.PORT;
 
@@ -30,6 +31,7 @@ app.use(
   passport.authenticate("jwt", { session: false }),
   productRouter
 );
+app.use("/api/favorite", verifyToken, favoriteRouter);
 app.use(errHandler);
 
 app.listen(port, () => {
